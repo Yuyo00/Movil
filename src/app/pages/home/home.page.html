@@ -1,8 +1,12 @@
 <!-- Comienza el Header -->
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar >
     <ion-title #titulo>
-      SkeletonAPP
+      
+        <img src="assets/img/logo_duoc.png" style="height: 80px;" class="ion-text-center">
+    
+        <h1>Sistema de Asistencia DuocUC</h1>
+ 
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,21 +16,33 @@
 <ion-content [fullscreen]="true" class="ion-padding-horizontal">
   <ion-title class="ion-padding-top">
     <ion-label class="ion-text-center">
-      <h1>¡Bienvenido!</h1>
-      <p *ngIf="usuario">Usuario: {{ usuario.nombre  }} {{ usuario.apellido }}</p>
-      <h4>Información Adicional</h4>
+      <h1>¡Bienvenido(a)!</h1>
+      <p *ngIf="usuario">{{ usuario.nombre  }} {{ usuario.apellido }}</p>
+      <h4>Escanea el codigo QR para registrar tu asistencia a 
+        <br>clases</h4>
+
+      
     </ion-label>
   </ion-title>
+  <ion-grid class="ion-text-center">
+    <ion-row>
+      <ion-col>
+        <img src="assets/img/QR_code_for_mobile_English_Wikipedia.svg.png" style="height: 450px;" >
+      </ion-col>
+    </ion-row>
+    <a routerLink="" click="logOff()"><h5><br><br>Cerrar Sesion</h5></a>
+    
+  </ion-grid>
   
-  <!-- Termina el Formulario -->
+
 </ion-content>
 <!-- Termina el content -->
 
 <!-- Comienza el footer -->
 <ion-footer>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title class="ion-text-left ion-text">
-      Desarrollador: Cristián Gómez Vega
+      UwU
     </ion-title>
   </ion-toolbar>
 </ion-footer>

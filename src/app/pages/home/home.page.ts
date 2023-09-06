@@ -50,7 +50,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
   }
 
-
+  public logOff(): void{
+    this.router.navigate(['/login'])
+  }
 
   public ngAfterViewInit(): void {
     if (this.itemTitulo) {
@@ -66,15 +68,6 @@ export class HomePage implements OnInit, AfterViewInit {
     }
   }
 
-  public limpiarFormulario(): void {
-
-    this.usuario.nombre = '';
-    this.usuario.apellido = '';
-
-    this.animateItem(this.itemNombre.nativeElement);
-    this.animateItem(this.itemApellido.nativeElement);
-
-  }
 
   public animateItem(elementRef: any) {
     this.animationController
