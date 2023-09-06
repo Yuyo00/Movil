@@ -1,30 +1,35 @@
-<ion-header>
-  <ion-toolbar >
-    <ion-title class="ion-text-center">
+<ion-content class="ion-text-center">
+
+  <ion-title>
       
-        <img src="assets/img/logo_duoc.png" style="height: 80px;" class="ion-text-center">
+        <img src="assets/img/logo_duoc.png" style="height: 80px;">
     
         <h1>Sistema de Asistencia DuocUC</h1>
 
     </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding-horizontal ion-text-center">
-      <ion-title class="ion-padding-top" > <h1>Recuperar Contraseña</h1></ion-title>
-      <ion-grid class="ion-text-center ion-padding-top">
+    <ion-card class="ion-padding-vertical">
+
+      <ion-card-title>
+        <h1>Recuperar contraseña</h1>
+      </ion-card-title>
+
+      <ion-grid class="ion-padding-top">
         <ion-row>
           <ion-col>
             <img src="assets/img/check-mark.png" style="height: 145px;"  >
           </ion-col>
         </ion-row>
-        <h3>
+        <h2>
           Verificación completada
-        </h3>
-        <h4>
-          Su contraseña es: 
-        </h4>
-        
-        
+        </h2>
+        <p>
+          Su contraseña es: <b>{{this.usuario.password}}</b>
+        </p>
       </ion-grid>
+    </ion-card>
+
+    <br>
+    <a routerLink="/login">Iniciar Sesión</a>
+
 </ion-content>
