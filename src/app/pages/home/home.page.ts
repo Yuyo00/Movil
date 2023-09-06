@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AnimationController} from '@ionic/angular';
-import { NivelEducacional } from 'src/app/model/nivel-educacional';
 import { Usuario } from 'src/app/model/usuario';
 
 @Component({
@@ -16,13 +15,9 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
   @ViewChild('itemNombre', { read: ElementRef }) itemNombre!: ElementRef;
   @ViewChild('itemApellido', { read: ElementRef }) itemApellido!: ElementRef;
-  @ViewChild('itemEducacion', { read: ElementRef }) itemEducacion!: ElementRef;
-  @ViewChild('itemFechaNacimiento', { read: ElementRef }) itemFechaNacimiento!: ElementRef;
 
   public usuario: Usuario;
-  public idNivelEducacional: number;
 
-  public nivelesEducacionales: NivelEducacional[] = NivelEducacional.getNivelesEducacionales();
 
    constructor(
         private activeroute: ActivatedRoute // Permite obtener los parámetros de la página login
@@ -30,8 +25,7 @@ export class HomePage implements OnInit, AfterViewInit {
       , private alertController: AlertController // Permite mostrar mensajes emergentes más complejos que Toast
       , private animationController: AnimationController) { // Permite crear animaciones con  
 
-    this.usuario = new Usuario('', '', '', '', '', '', 0, null);
-    this.idNivelEducacional = 0;
+    this.usuario = new Usuario('', '', '', '', '', '');
 
     // Se llama a la ruta activa y se obtienen sus parámetros mediante una subscripcion
     this.activeroute.queryParams.subscribe(params => { 
@@ -41,9 +35,6 @@ export class HomePage implements OnInit, AfterViewInit {
         // Si tiene datos extra, se rescatan y se asignan a una propiedad
         if (nav.extras.state) {
           this.usuario = nav.extras.state['usuario'];
-          if (this.usuario.nivelEducacional !== undefined) {
-            this.idNivelEducacional = this.usuario.nivelEducacional.id;
-          }
           return;
         }
       }
@@ -59,9 +50,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   }
 
-  public cambiarNivelEducacional(): void {
-    this.usuario.setNivelEducacional(this.idNivelEducacional);
-  }
+
 
   public ngAfterViewInit(): void {
     if (this.itemTitulo) {
@@ -81,14 +70,10 @@ export class HomePage implements OnInit, AfterViewInit {
 
     this.usuario.nombre = '';
     this.usuario.apellido = '';
-    this.usuario.nivelEducacional = undefined;
-    this.idNivelEducacional = 0;
-    this.usuario.fechaNacimiento = null;
 
     this.animateItem(this.itemNombre.nativeElement);
     this.animateItem(this.itemApellido.nativeElement);
-    this.animateItem(this.itemEducacion.nativeElement);
-    this.animateItem(this.itemFechaNacimiento.nativeElement);
+
   }
 
   public animateItem(elementRef: any) {
@@ -116,8 +101,6 @@ export class HomePage implements OnInit, AfterViewInit {
       mensaje += '<br><b>Usuario</b>: <br>' + this.usuario.getCorreo();
       mensaje += '<br><b>Nombre</b>: <br>' + this.usuario.getNombre();
       mensaje += '<br><b>Apellido</b>: <br>' + this.usuario.getApellido();
-      mensaje += '<br><b>Educación</b>: <br>' + this.usuario.getNivelEducacional();
-      mensaje += '<br><b>Nacimiento</b>: <br>' + this.usuario.getFechaNacimiento();
 
       this.presentAlert('Datos personales', mensaje);
     }
