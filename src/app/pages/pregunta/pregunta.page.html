@@ -11,32 +11,31 @@
 
       <ion-card-title class="ion-text-center">
         <ion-label>
-          <h2>Iniciar Sesión</h2>
+          <h2>Recuperar contraseña</h2>
+          <h3>Paso 2: Responde la pregunta secreta</h3>
+
+          <h4 *ngIf="usuario">{{ usuario.nombre }} {{ usuario.apellido }}<br>{{ usuario.preguntaSecreta }}</h4>
         </ion-label>
       </ion-card-title>
 
       <form>
         <ion-card-content>
           
+
+
           <ion-item>
-            <ion-input name="correo" label="Ingrese Correo" labelPlacement="floating" type="text" [(ngModel)]="usuario.correo"></ion-input>
-          </ion-item>
-          
-          <ion-item>
-            <ion-input name="password"  label="Ingrese Contraseña" labelPlacement="floating" type="password" [(ngModel)]="usuario.password"></ion-input>
+            <ion-input name="respuesta" label="Ingresa tu respuesta" labelPlacement="floating" type="text" [(ngModel)]="respuestaUsuario"></ion-input>
           </ion-item>
 
           <br>
-          <ion-button (click)="ingresar()">Ingresar</ion-button>
+          <ion-button (click)="Responder()">Recuperar Contraseña</ion-button>
 
         </ion-card-content>
       </form>
       
       <ion-label>
         <br>
-        <a routerLink="">¿No tienes cuenta? Crea una aquí</a>
-        <br>
-        <a routerLink="/correo">Recuperar contraseña</a>
+        <a routerLink="/login">Iniciar Sesión</a>
       </ion-label>
     </ion-card> 
 
