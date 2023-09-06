@@ -36,7 +36,12 @@ export class PreguntaPage implements OnInit, AfterViewInit {
 
   public Responder() : void {
     if (this.usuario.respuestaSecreta === this.respuestaUsuario) {
-      alert('Correcto' + this.usuario.password)
+      const navigationExtras: NavigationExtras = {
+        state: {
+          usuario: this.usuario
+        }
+      };
+      this.router.navigate(['/correcto'], navigationExtras);
     } else {
       alert('Incorrecto')
     }

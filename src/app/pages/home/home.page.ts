@@ -65,13 +65,14 @@ export class HomePage implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     if (this.itemTitulo) {
-      const animation = this.animationController
-        .create()
+    const animation = this.animationController
+      .create()
         .addElement(this.itemTitulo.nativeElement)
         .iterations(Infinity)
         .duration(6000)
         .fromTo('transform', 'translate(0%)', 'translate(100%)')
-        .fromTo('opacity', 0.2, 1);
+      //  .fromTo('opacity', 0.2, 1)
+        ;
 
       animation.play();
     }

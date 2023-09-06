@@ -1,8 +1,12 @@
 <!-- Comienza el Header -->
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title #titulo>
-      SkeletonAPP
+  <ion-toolbar >
+    <ion-title >
+      
+        <img src="assets/img/logo_duoc.png" style="height: 80px;" class="ion-text-center">
+    
+        <h1 #titulo>Sistema de Asistencia DuocUC</h1>
+ 
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,76 +16,23 @@
 <ion-content [fullscreen]="true" class="ion-padding-horizontal">
   <ion-title class="ion-padding-top">
     <ion-label class="ion-text-center">
-      <h1>¡Bienvenido!</h1>
-      <p *ngIf="usuario">Usuario: {{ usuario.correo }}</p>
-      <h4>GIt hub prueba</h4>
+      <h1 #color>¡Bienvenid@!</h1>
+      <h2 *ngIf="usuario" #color>{{ usuario.nombre  }} {{ usuario.apellido }}</h2>
+      <p>Escanea el codigo QR para registrar tu asistencia a clases</p>
+
+      
     </ion-label>
   </ion-title>
+  <ion-grid class="ion-text-center">
+    <ion-row>
+      <ion-col>
+        <img src="assets/img/QR_code_for_mobile_English_Wikipedia.svg.png" style="height: 450px;" >
+      </ion-col>
+    </ion-row>
+    <a routerLink="" click="logOff()"><h5><br><br>Cerrar Sesión</h5></a>
+    
+  </ion-grid>
   
-  <!-- Comienza el Formulario -->
-  <form>
-    <ion-list>
-      <!-- Nombre del usuario -->
-      <ion-item #itemNombre>
-        <ion-input name="nombre" label="Nombre" labelPlacement="floating" type="text" 
-          [(ngModel)]="usuario.nombre"></ion-input>
-      </ion-item>
 
-      <!-- Apellido del usuario -->
-      <ion-item #itemApellido>
-        <ion-input name="apellido" label="Apellido" labelPlacement="floating" type="text" 
-          [(ngModel)]="usuario.apellido"></ion-input>
-      </ion-item>
-
-      <!-- Nivel educacional del usuario -->
-      <ion-item #itemEducacion>
-        <ion-select 
-            name="nivelEducacional" label="Educación" labelPlacement="floating"
-            [(ngModel)]="idNivelEducacional" (ngModelChange)="cambiarNivelEducacional()">
-          <ion-select-option *ngFor="let nived of nivelesEducacionales" [value]="nived.id">
-            {{ nived.nombre }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <!-- Fecha de nacimiento del usuario -->
-      <ion-item #itemFechaNacimiento>
-        <mat-form-field slot="start" [ngClass]="'fecha'">
-          <mat-label>Nacimiento</mat-label>
-          <input matInput name="date" [matDatepicker]="fecha" [(ngModel)]="usuario.fechaNacimiento" readonly>
-          <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
-          <mat-datepicker #fecha></mat-datepicker>
-        </mat-form-field>
-      </ion-item>
-    </ion-list>
-
-    <!-- Area de botones -->
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <ion-button shape="block" (click)="limpiarFormulario()"> Limpiar </ion-button>
-        </ion-col>
-        <ion-col col-6>
-          <ion-button shape="block" (click)="mostrarDatosPersona()"> Mostrar </ion-button>
-        </ion-col>
-        
-
-      <a routerLink="/pregunta">Pregunta</a>
-
-      </ion-row>
-    </ion-grid>
-  
-  </form>
-  <!-- Termina el Formulario -->
 </ion-content>
 <!-- Termina el content -->
-
-<!-- Comienza el footer -->
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-title class="ion-text-left ion-text">
-      Desarrollador: Cristián Gómez Vega
-    </ion-title>
-  </ion-toolbar>
-</ion-footer>
-<!-- Termina el footer -->

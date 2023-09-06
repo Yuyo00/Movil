@@ -5,13 +5,10 @@ ion-header {
   --padding-start: 20px;
 }
 
-.fecha {
-  margin-left: -18px !important;
-  padding: 0px;
-  width: 100%;
+h4, p, h5 {
+  font-family: 'Merriweather Light' !important;
 }
 
-mat-form-field {
-  padding: 0px;
-  margin: auto;
+h1, h2, h3 {
+  font-family: 'Merriweather Bold' !important;
 }
