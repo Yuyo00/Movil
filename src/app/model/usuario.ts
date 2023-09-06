@@ -88,6 +88,12 @@ export class Usuario extends Persona {
     return nived;
   }
 
+  public buscarCorreoValido(correo: string): Usuario | undefined {
+    const nived: Usuario | undefined = this.listaUsuariosValidos().find(
+      usu => usu.correo === correo);
+    return nived;
+  }
+
   public validarCorreo(): string {
     const patronCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (patronCorreo.test(this.correo)) {

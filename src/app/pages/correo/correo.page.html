@@ -11,7 +11,8 @@
 
       <ion-card-title class="ion-text-center">
         <ion-label>
-          <h2>Iniciar Sesión</h2>
+          <h2>Recuperar contraseña</h2>
+          <h4>Paso 1: Ingresa tu correo</h4>
         </ion-label>
       </ion-card-title>
 
@@ -19,24 +20,18 @@
         <ion-card-content>
           
           <ion-item>
-            <ion-input name="correo" label="Ingrese Correo" labelPlacement="floating" type="text" [(ngModel)]="usuario.correo"></ion-input>
-          </ion-item>
-          
-          <ion-item>
-            <ion-input name="password"  label="Ingrese Contraseña" labelPlacement="floating" type="password" [(ngModel)]="usuario.password"></ion-input>
+            <ion-input name="correo" label="Ingresa tu Correo" labelPlacement="floating" type="text" [(ngModel)]="correo"></ion-input>
           </ion-item>
 
           <br>
-          <ion-button (click)="ingresar()">Ingresar</ion-button>
+          <ion-button (click)="IrPregunta()">Recuperar Contraseña</ion-button>
 
         </ion-card-content>
       </form>
       
       <ion-label>
         <br>
-        <a routerLink="">¿No tienes cuenta? Crea una aquí</a>
-        <br>
-        <a routerLink="/correo">Recuperar contraseña</a>
+        <a routerLink="/login">Iniciar Sesión</a>
       </ion-label>
     </ion-card> 
 
