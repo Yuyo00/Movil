@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   // anterior es especialmente importante para mantener la coherencia y estados compartidos en los Servicios.
   
   constructor(private router: Router, private toastController: ToastController) {
-    this.usuario = new Usuario('', '', '', '', '', '', 0, null)
+    this.usuario = new Usuario('', '', '', '', '', '')
   
     // Puedes descomentar cualquiera de los siguientes usuarios, para 
     // hacer tus pruebas y así no tener que digitarlos a cada rato

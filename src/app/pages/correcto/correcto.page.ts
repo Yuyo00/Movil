@@ -16,7 +16,7 @@ export class CorrectoPage implements OnInit {
         private activeroute: ActivatedRoute // Permite obtener los parámetros de la página login
       , private router: Router) { // Permite crear animaciones con  
 
-    this.usuario = new Usuario('', '', '', '', '', '', 0, null)
+    this.usuario = new Usuario('', '', '', '', '', '')
 
     // Se llama a la ruta activa y se obtienen sus parámetros mediante una subscripcion
     this.activeroute.queryParams.subscribe(params => { 
