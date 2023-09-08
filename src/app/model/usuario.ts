@@ -1,5 +1,5 @@
 import { Persona } from "./persona";
-import { NivelEducacional } from "./nivel-educacional";
+
 
 export class Usuario extends Persona {
 
@@ -9,14 +9,13 @@ export class Usuario extends Persona {
   public respuestaSecreta: string;
 
   constructor(correo: string, password: string, preguntaSecreta: string, respuestaSecreta: string
-      , nombre: string, apellido: string, idNivelEducacional: number
-      , fechaNacimiento: Date | null) {
+      , nombre: string, apellido: string) {
     super();
     this.correo = correo;
     this.password = password;
     this.preguntaSecreta = preguntaSecreta;
     this.respuestaSecreta = respuestaSecreta;
-    this.setPersona(nombre, apellido, idNivelEducacional, fechaNacimiento);
+    this.setPersona(nombre, apellido);
   }
 
   public getCorreo(): string {
@@ -32,15 +31,6 @@ export class Usuario extends Persona {
     this.password = password;
   }
 
-  public setNivelEducacional(id: number): void {
-    const nived = NivelEducacional.findNivelEducacionalById(id);
-    if (nived === undefined) {
-      throw new Error(`No existe el nivel educacional ${id}`);
-    } else {
-      this.nivelEducacional = nived;
-    }
-  }
-
   public listaUsuariosValidos(): Usuario[] {
     const lista = [];
     lista.push(new Usuario(
@@ -50,8 +40,7 @@ export class Usuario extends Persona {
       , ''
       , ''
       , ''
-      , 0
-      , null));
+    ));
     lista.push(new Usuario(
         'atorres@duocuc.cl'
       , '1234'
@@ -59,8 +48,7 @@ export class Usuario extends Persona {
       , 'gato'
       , 'Ana'
       , 'Torres'
-      , 5
-      , new Date(2000, 1, 1)));
+      ));
     lista.push(new Usuario(
         'jperez@duocuc.cl'
       , '5678'
@@ -68,8 +56,7 @@ export class Usuario extends Persona {
       , 'panqueques'
       , 'Juan'
       , 'Pérez'
-      , 6
-      , new Date(2000, 2, 1)));
+      ));
     lista.push(new Usuario(
         'cmujica@duocuc.cl'
       , '0987'
@@ -77,20 +64,13 @@ export class Usuario extends Persona {
       , 'moto'
       , 'Carla'
       , 'Mujica'
-      , 7
-      , new Date(2000, 3, 1)));
+      ));
     return lista;
   }
 
   public buscarUsuarioValido(correo: string, password: string): Usuario | undefined {
     const nived: Usuario | undefined = this.listaUsuariosValidos().find(
       usu => usu.correo === correo && usu.password === password);
-    return nived;
-  }
-
-  public buscarCorreoValido(correo: string): Usuario | undefined {
-    const nived: Usuario | undefined = this.listaUsuariosValidos().find(
-      usu => usu.correo === correo);
     return nived;
   }
 
@@ -125,6 +105,12 @@ export class Usuario extends Persona {
 
   public validarUsuario(): string {
     return this.validarCorreo() || this.validarPassword() || this.validarCredenciales();
+  }
+
+  public buscarCorreoValido(correo: string): Usuario | undefined {
+    const nived: Usuario | undefined = this.listaUsuariosValidos().find(
+      usu => usu.correo === correo);
+    return nived;
   }
 
 }

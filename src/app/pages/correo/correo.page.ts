@@ -12,7 +12,7 @@ import { Usuario } from 'src/app/model/usuario';
 export class CorreoPage implements OnInit {
 
   constructor(private router: Router, private toastController: ToastController) { 
-    this.usuario = new Usuario('', '', '', '', '', '', 0, null)
+    this.usuario = new Usuario('', '', '', '', '', '')
   }
   public usuario: Usuario;
   public ngOnInit(): void {
@@ -25,7 +25,7 @@ export class CorreoPage implements OnInit {
   public correo: string = '';
 
   public IrPregunta() : void {
-    const usu = new Usuario('', '', '', '', '', '', 0, null);
+    const usu = new Usuario('', '', '', '', '', '');
     const usuarioValidado= usu.buscarCorreoValido(this.correo);
 
     if (!usuarioValidado) {
