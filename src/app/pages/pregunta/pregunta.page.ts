@@ -43,7 +43,7 @@ export class PreguntaPage implements OnInit, AfterViewInit {
       };
       this.router.navigate(['/correcto'], navigationExtras);
     } else {
-      alert('Incorrecto')
+      this.router.navigate(['/incorrecto']);
     }
   }
   public ngOnInit(): void {

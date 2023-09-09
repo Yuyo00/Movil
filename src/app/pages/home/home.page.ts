@@ -28,6 +28,7 @@ export class HomePage implements OnInit, AfterViewInit {
   public escaneando = false;
   public datosQR: string = '';
   public usuario: Usuario;
+  public datos = false;
 
 
 
@@ -47,12 +48,10 @@ this.activeroute.queryParams.subscribe(params => {
     // Si tiene datos extra, se rescatan y se asignan a una propiedad
     if (nav.extras.state) {
       this.usuario = nav.extras.state['usuario'];
+      this.datosQR = nav.extras.state['qr'];
       return;
     }
   }
-  // Si no vienen datos extra desde la página anterior, quiere decir que el usuario
-  // intentó entrar directamente a la página home sin pasar por el login,
-  // de modo que el sistema debe enviarlo al login para que inicie sesión.
   this.router.navigate(['/login']);
 
 });
@@ -161,24 +160,41 @@ this.activeroute.queryParams.subscribe(params => {
       if (qrCode.data !== '') {
         this.escaneando = false;
         this.mostrarDatosQROrdenados(qrCode.data);
+        this.datosQR = qrCode.data;
+        this.datos = true;
         return true;
       }
     }
+    this.datos = false;
     return false;
   }
   public mostrarDatosQROrdenados(datosQR: string): void {
     this.datosQR = datosQR;
     const objetoDatosQR = JSON.parse(datosQR);
     this.asistencia.setAsistencia(objetoDatosQR.bloqueInicio,objetoDatosQR.bloqueTermino,objetoDatosQR.dia,objetoDatosQR.horaFin,objetoDatosQR.horaInicio, objetoDatosQR.idAsignatura, objetoDatosQR.nombreAsignatura,objetoDatosQR.nombreProfesor,objetoDatosQR.seccion,objetoDatosQR.sede);
-
   }
+
   public detenerEscaneoQR(): void {
     this.escaneando = false;
   }
 
-  public misClases(): void{
-    this.router.navigate(['/misclase']);
+  public ingresar(): void {
+    if (this.datos) {
+      // NavigationExtras sirve para pasarle parámetros a la página Home. Los parámetros se agregan al objeto "state"
+      const navigationExtras: NavigationExtras = {
+        state: {
+          asistencia: this.asistencia
+        }
+      };
+      
+      this.router.navigate(['/misclase'], navigationExtras); // Navegamos hacia el Home y enviamos la información extra
+    }
   }
-  
 }
+
+
+
+
+
+
 

@@ -16,7 +16,7 @@ export class IncorrectoPage implements OnInit {
 
   public ToLogIn(): void {
     
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']);
     }
   }
 
