@@ -18,6 +18,7 @@ ion-button {
 
 ion-content, h5 {
   font-family: 'Merriweather', 'Merriweather Bold', 'Merriweather Black', 'Merriweather Italic', 'Merriweather BoldItalic' !important;
+  
 }
 
 h4, p {
@@ -30,4 +31,11 @@ h1, h2, h3 {
 
 a {
   font-family: 'Lato Regular' !important;
+}
+
+.bg-image{
+  --background: #fff url('/assets/img/2persons.webp') no-repeat center center / cover;
+}
+.login {
+  background-color: rgba(26, 25, 25, 0.8)!important;
 }

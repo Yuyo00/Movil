@@ -29,7 +29,7 @@ export class CorreoPage implements OnInit {
     const usuarioValidado= usu.buscarCorreoValido(this.correo);
 
     if (!usuarioValidado) {
-      alert('No se encontro el correo')
+      this.router.navigate(['/incorrecto']);
     } else {
       const navigationExtras: NavigationExtras = {
         state: {
