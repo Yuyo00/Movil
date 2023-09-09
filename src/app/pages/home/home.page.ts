@@ -5,6 +5,7 @@ import { AnimationController} from '@ionic/angular';
 import { Usuario } from 'src/app/model/usuario';
 import jsQR, { QRCode } from 'jsqr';
 import { Asistencia } from 'src/app/model/asistencia';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -33,19 +34,20 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
   constructor(
-    private activeroute: ActivatedRoute // Permite obtener los parámetros de la página login
-  , private router: Router // Permite navegar entre páginas
-  , private alertController: AlertController // Permite mostrar mensajes emergentes más complejos que Toast
-  , private animationController: AnimationController) { // Permite crear animaciones con  
+    private activeroute: ActivatedRoute 
+  , private router: Router 
+  , private alertController: AlertController 
+  , private animationController: AnimationController
+  , private toastController: ToastController) { 
 
 this.usuario = new Usuario('', '', '', '', '', '');
 
-// Se llama a la ruta activa y se obtienen sus parámetros mediante una subscripcion
+
 this.activeroute.queryParams.subscribe(params => { 
 
   const nav = this.router.getCurrentNavigation();
   if (nav) {
-    // Si tiene datos extra, se rescatan y se asignan a una propiedad
+
     if (nav.extras.state) {
       this.usuario = nav.extras.state['usuario'];
       this.datosQR = nav.extras.state['qr'];
@@ -101,14 +103,13 @@ this.activeroute.queryParams.subscribe(params => {
 
   public mostrarDatosPersona(): void {
     
-    // Si el usuario no ingresa al menos el nombre o el apellido, se mostrará un error
+
     if (this.usuario.nombre.trim() === '' && this.usuario.apellido === '') {
       this.presentAlert('Datos personales', 'Para mostrar los datos de la persona, '
         + 'al menos debe tener un valor para el nombre o el apellido.');
       return;
     }
 
-    // Mostrar un mensaje emergente con los datos de la persona
     let mensaje = '';
     if (this.usuario) {
       mensaje += '<br><b>Usuario</b>: <br>' + this.usuario.getCorreo();
@@ -119,7 +120,6 @@ this.activeroute.queryParams.subscribe(params => {
     }
   }
 
-  // Este método sirve para mostrar un mensaje emergente
   public async presentAlert(titulo: string, mensaje: string) {
     const alert = await this.alertController.create({
       header: titulo,
@@ -180,16 +180,28 @@ this.activeroute.queryParams.subscribe(params => {
 
   public ingresar(): void {
     if (this.datos) {
-      // NavigationExtras sirve para pasarle parámetros a la página Home. Los parámetros se agregan al objeto "state"
       const navigationExtras: NavigationExtras = {
         state: {
           asistencia: this.asistencia
         }
       };
       
-      this.router.navigate(['/misclase'], navigationExtras); // Navegamos hacia el Home y enviamos la información extra
+      this.router.navigate(['/misclase'], navigationExtras);
+    }
+    else{
+      this.mostrarMensaje(`No se encontro una clase`);
     }
   }
+  async mostrarMensaje(mensaje: string, duracion?: number) {
+
+    const toast = await this.toastController.create({
+        message: mensaje,
+        duration: duracion? duracion: 2000
+      });
+    toast.present();
+  }
+
+  
 }
 
 

@@ -1,4 +1,4 @@
-<!-- Comienza el Header -->
+
 <ion-header>
   <ion-toolbar >
     <ion-title >
@@ -10,9 +10,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<!-- Termina el Header -->
 
-<!-- Comienza el Content -->
 <ion-content [fullscreen]="true" class="ion-padding-horizontal" >
   <ion-title class="ion-padding-top">
     <ion-label class="ion-text-center">
@@ -29,7 +27,7 @@
       
       <img src="assets/img/QR_code_for_mobile_English_Wikipedia.svg.png" style="height: 450px;">
     </a>
-    <p *ngIf="!escaneando" style="position:relative; top: -235px;"> Presione para activar la camara </p>
+    <p (click)="comenzarEscaneoQR()" *ngIf="!escaneando" style="position:relative; top: -235px;"> Presione para activar la camara </p>
     <video #video [hidden]="!escaneando" height="450px" ></video>
     <canvas #canvas hidden></canvas>
     <ion-row>
@@ -40,25 +38,10 @@
     </ion-button>
     </ion-col>
     </ion-row>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Los datos del Código QR son los siguientes:</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="borde">
-        <h2 *ngIf="datosQR">
-          Sede: {{ asistencia.sede }} <br>
-          Sigla: {{asistencia.idAsignatura}}
-        </h2>
-        <h2 *ngIf="!datosQR">
-          Sin información
-        </h2>
-      </ion-card-content>
-    </ion-card>
     <a (click)="logOff()"><h5><br><br>Cerrar Sesión</h5></a>
-    <ion-button (click)="ingresar()"><h5>a</h5></ion-button>
+    <ion-button (click)="ingresar()"><h5>Mis clases</h5></ion-button>
   </ion-grid>
   
   
 
 </ion-content>
-<!-- Termina el content -->
