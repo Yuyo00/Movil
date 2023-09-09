@@ -16,3 +16,8 @@ h1, h2, h3 {
 .qr {
   filter: blur(4px);
 }
+
+ion-button {
+  --background: #FFB800;
+  font-family: 'Lato Regular' !important;
+}

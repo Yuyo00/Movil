@@ -24,7 +24,22 @@ export class MisclasePage implements OnInit {
   , private animationController: AnimationController) {
     this.usuario = new Usuario('', '', '', '', '', '');
     
-   }
+    this.activeroute.queryParams.subscribe(params => { 
+
+      const nav = this.router.getCurrentNavigation();
+      if (nav) {
+        // Si tiene datos extra, se rescatan y se asignan a una propiedad
+        if (nav.extras.state) {
+          this.usuario = nav.extras.state['usuario'];
+          this.asistencia = nav.extras.state['asistencia'];
+          return;
+        }
+      }
+      this.router.navigate(['/login']);
+    });
+  }
+
+  
 
   ngOnInit() {
   }
