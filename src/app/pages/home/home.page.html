@@ -24,14 +24,40 @@
     </ion-label>
   </ion-title>
   <ion-grid class="ion-text-center">
-    <ion-row>
-      <ion-col>
-        <img src="assets/img/QR_code_for_mobile_English_Wikipedia.svg.png" style="height: 450px;" >
-      </ion-col>
-    </ion-row>
-    <a routerLink="" click="logOff()"><h5><br><br>Cerrar Sesión</h5></a>
     
+    <a *ngIf="!escaneando" (click)="comenzarEscaneoQR()" class="qr">
+      
+      <img src="assets/img/QR_code_for_mobile_English_Wikipedia.svg.png" style="height: 450px;">
+    </a>
+    <p *ngIf="!escaneando" style="position:relative; top: -235px;"> Presione para activar la camara </p>
+    <video #video [hidden]="!escaneando" height="450px" ></video>
+    <canvas #canvas hidden></canvas>
+    <ion-row>
+    <ion-col size="12">
+    <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()"  shape="round" class="ion-text-center" >
+      <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+      Detener escaneo de QR
+    </ion-button>
+    </ion-col>
+    </ion-row>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Los datos del Código QR son los siguientes:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="borde">
+        <h2 *ngIf="datosQR">
+          Sede: {{ asistencia.sede }} <br>
+          Sigla: {{asistencia.idAsignatura}}
+        </h2>
+        <h2 *ngIf="!datosQR">
+          Sin información
+        </h2>
+      </ion-card-content>
+    </ion-card>
+    <a (click)="logOff()"><h5><br><br>Cerrar Sesión</h5></a>
+    <a (click)="misClases()"><h5><br><br>a</h5></a>
   </ion-grid>
+  
   
 
 </ion-content>

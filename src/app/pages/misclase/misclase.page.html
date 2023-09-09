@@ -1,0 +1,63 @@
+<ion-content class="ion-text-center">
+
+  <ion-title>
+      
+    <img src="assets/img/logo_duoc.png" style="height: 80px;">
+
+    <h1>Sistema de Asistencia DuocUC</h1>
+
+</ion-title>
+<h1 class="ion-padding-horizontal ion-padding-top"> Datos de la asignatura</h1>
+    <ion-list style="width: 85%;"  >
+      <ion-item >
+        <h2>
+          Sede: {{asistencia.sede}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Sigla: {{asistencia.idAsignatura}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Sección: {{asistencia.seccion}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Nombre asignatura: {{asistencia.nombreAsignatura}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Nombre profesor: {{asistencia.nombreProfesor}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Día: {{asistencia.dia}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Bloque de inicio: {{asistencia.bloqueInicio}}
+        </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+        Bloque de termino: {{asistencia.bloqueTermino}}
+      </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+        Hora de inicio: {{asistencia.horaInicio}}
+      </h2>
+      </ion-item>
+      <ion-item>
+        <h2>
+          Hora de término: {{asistencia.horaFin}}
+        </h2>
+      </ion-item>
+    </ion-list>
+</ion-content>

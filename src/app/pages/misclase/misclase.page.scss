@@ -1,0 +1,21 @@
+
+ion-header {
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    --padding-end: 20px;
+    --padding-start: 20px;
+  }
+  
+  h4, p, h5 {
+    font-family: 'Merriweather Light' !important;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Merriweather Bold' !important;
+  }
+
+.listaClase{
+    justify-content: center;
+	display: flex!important;
+ 	align-items: center!important;
+}
