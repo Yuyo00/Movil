@@ -12,3 +12,7 @@ h4, p, h5 {
 h1, h2, h3 {
   font-family: 'Merriweather Bold' !important;
 }
+
+.qr {
+  filter: blur(4px);
+}

@@ -1,8 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router , NavigationExtras} from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AnimationController} from '@ionic/angular';
 import { Usuario } from 'src/app/model/usuario';
+import jsQR, { QRCode } from 'jsqr';
+import { Asistencia } from 'src/app/model/asistencia';
+
 
 @Component({
   selector: 'app-home',
@@ -15,9 +18,15 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
   @ViewChild('itemNombre', { read: ElementRef }) itemNombre!: ElementRef;
   @ViewChild('itemApellido', { read: ElementRef }) itemApellido!: ElementRef;
-  @ViewChild('itemEducacion', { read: ElementRef }) itemEducacion!: ElementRef;
-  @ViewChild('itemFechaNacimiento', { read: ElementRef }) itemFechaNacimiento!: ElementRef;
+  @ViewChild('video')
+  private video!: ElementRef;
 
+  @ViewChild('canvas')
+  private canvas!: ElementRef;
+
+  public asistencia: Asistencia = new Asistencia();
+  public escaneando = false;
+  public datosQR: string = '';
   public usuario: Usuario;
 
 
@@ -53,6 +62,10 @@ this.activeroute.queryParams.subscribe(params => {
 
   }
 
+  public logOff(): void{
+    this.router.navigate(['/login'])
+  }
+
   public ngAfterViewInit(): void {
     if (this.itemTitulo) {
     const animation = this.animationController
@@ -75,8 +88,6 @@ this.activeroute.queryParams.subscribe(params => {
 
     this.animateItem(this.itemNombre.nativeElement);
     this.animateItem(this.itemApellido.nativeElement);
-    this.animateItem(this.itemEducacion.nativeElement);
-    this.animateItem(this.itemFechaNacimiento.nativeElement);
   }
 
   public animateItem(elementRef: any) {
@@ -119,4 +130,55 @@ this.activeroute.queryParams.subscribe(params => {
 
     await alert.present();
   }
+  public async comenzarEscaneoQR() {
+    const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({
+      video: {facingMode: 'environment'}
+    });
+    this.video.nativeElement.srcObject = mediaProvider;
+    this.video.nativeElement.setAttribute('playsinline', 'true');
+    this.video.nativeElement.play();
+    this.escaneando = true;
+    requestAnimationFrame(this.verificarVideo.bind(this));
+  }
+  async verificarVideo() {
+    if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
+      if (this.obtenerDatosQR() || !this.escaneando) return;
+      requestAnimationFrame(this.verificarVideo.bind(this));
+    } else {
+      requestAnimationFrame(this.verificarVideo.bind(this));
+    }
+  }
+  public obtenerDatosQR(): boolean {
+    const w: number = this.video.nativeElement.videoWidth;
+    const h: number = this.video.nativeElement.videoHeight;
+    this.canvas.nativeElement.width = w;
+    this.canvas.nativeElement.height = h;
+    const context: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d');
+    context.drawImage(this.video.nativeElement, 0, 0, w, h);
+    const img: ImageData = context.getImageData(0, 0, w, h);
+    let qrCode: QRCode | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
+    if (qrCode) {
+      if (qrCode.data !== '') {
+        this.escaneando = false;
+        this.mostrarDatosQROrdenados(qrCode.data);
+        return true;
+      }
+    }
+    return false;
+  }
+  public mostrarDatosQROrdenados(datosQR: string): void {
+    this.datosQR = datosQR;
+    const objetoDatosQR = JSON.parse(datosQR);
+    this.asistencia.setAsistencia(objetoDatosQR.bloqueInicio,objetoDatosQR.bloqueTermino,objetoDatosQR.dia,objetoDatosQR.horaFin,objetoDatosQR.horaInicio, objetoDatosQR.idAsignatura, objetoDatosQR.nombreAsignatura,objetoDatosQR.nombreProfesor,objetoDatosQR.seccion,objetoDatosQR.sede);
+
+  }
+  public detenerEscaneoQR(): void {
+    this.escaneando = false;
+  }
+
+  public misClases(): void{
+    this.router.navigate(['/misclase']);
+  }
+  
 }
+
