@@ -27,13 +27,15 @@
           </ion-item>
         
           <br>
-          <ion-button (click)="ingresar()">Ingresar</ion-button>
+          <ion-button (click)="ingresar()" shape="round">
+            Ingresar
+            <ion-icon  name="chevron-forward-outline"></ion-icon>
+          </ion-button>
 
         </ion-card-content>
       </form>
       
       <ion-label>
-        <br>
         <a routerLink="/correo">Recuperar contraseña</a>
       </ion-label>
     </ion-card> 

@@ -6,19 +6,17 @@
         <img src="assets/img/logo_duoc.png" style="height: 80px;" class="ion-text-center">
     
         <h1 #titulo>Sistema de Asistencia DuocUC</h1>
- 
+
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding-horizontal" >
   <ion-title class="ion-padding-top">
-    <ion-label class="ion-text-center">
-      <h1 #color>¡Bienvenid@!</h1>
-      <h2 *ngIf="usuario" #color>{{ usuario.nombre  }} {{ usuario.apellido }}</h2>
+    <ion-label class="ion-text-center" >
+      <h1 #Bienvenida>¡Bienvenid@!</h1>
+      <h2 #Nombre *ngIf="usuario">{{ usuario.nombre  }} {{ usuario.apellido }}</h2>
       <p>Escanea el codigo QR para registrar tu asistencia a clases</p>
-
-      
     </ion-label>
   </ion-title>
   <ion-grid class="ion-text-center">
@@ -34,14 +32,21 @@
     <ion-col size="12">
     <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()"  shape="round" class="ion-text-center" >
       <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
-      Detener escaneo de QR
+      Detener escaneo
     </ion-button>
+    <ion-button *ngIf="datos" (click)="miClase()"  shape="round" class="ion-text-center" >
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      Ver informacion de la clase
+    </ion-button>
+    <p *ngIf="!datos && !escaneando">
+      <ion-text color="medium">Escanee código QR para acceder a Mi Clase</ion-text>
+    </p>
     </ion-col>
     </ion-row>
-    <a (click)="logOff()"><h5><br><br>Cerrar Sesión</h5></a>
-    <ion-button (click)="ingresar()"><h5>Mis clases</h5></ion-button>
+  
+    <ion-button (click)="logOff()"  shape="round" class="ion-text-center" id="cerrarSesion">
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
   </ion-grid>
-  
-  
-
 </ion-content>

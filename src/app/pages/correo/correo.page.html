@@ -24,13 +24,14 @@
           </ion-item>
 
           <br>
-          <ion-button (click)="IrPregunta()">Recuperar Contraseña</ion-button>
-
+          <ion-button (click)="IrPregunta()" shape="round">
+            Recuperar Contraseña
+            <ion-icon  name="chevron-forward-outline"></ion-icon>
+          </ion-button>
         </ion-card-content>
       </form>
       
       <ion-label>
-        <br>
         <a routerLink="/login">Iniciar Sesión</a>
       </ion-label>
     </ion-card> 

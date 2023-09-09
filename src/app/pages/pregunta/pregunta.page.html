@@ -21,20 +21,19 @@
       <form>
         <ion-card-content>
           
-
-
           <ion-item>
             <ion-input name="respuesta" label="Ingresa tu respuesta" labelPlacement="floating" type="text" [(ngModel)]="respuestaUsuario"></ion-input>
           </ion-item>
 
-          <br>
-          <ion-button (click)="Responder()">Recuperar Contraseña</ion-button>
+          <ion-button (click)="Responder()" shape="round">
+            Recuperar Contraseña
+            <ion-icon  name="chevron-forward-outline"></ion-icon>
+          </ion-button>
 
         </ion-card-content>
       </form>
       
       <ion-label>
-        <br>
         <a routerLink="/login">Iniciar Sesión</a>
       </ion-label>
     </ion-card> 
