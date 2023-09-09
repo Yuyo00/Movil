@@ -16,7 +16,10 @@ import { ToastController } from '@ionic/angular';
 
 export class HomePage implements OnInit, AfterViewInit {
 
+  @ViewChild('Nombre', { read: ElementRef }) itemNombreTit!: ElementRef;
+  @ViewChild('Bienvenida', { read: ElementRef }) itemBienvenida!: ElementRef;
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
+  
   @ViewChild('itemNombre', { read: ElementRef }) itemNombre!: ElementRef;
   @ViewChild('itemApellido', { read: ElementRef }) itemApellido!: ElementRef;
   @ViewChild('video')
@@ -25,20 +28,15 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('canvas')
   private canvas!: ElementRef;
 
+  
+
   public asistencia: Asistencia = new Asistencia();
   public escaneando = false;
   public datosQR: string = '';
   public usuario: Usuario;
   public datos = false;
 
-
-
-  constructor(
-    private activeroute: ActivatedRoute 
-  , private router: Router 
-  , private alertController: AlertController 
-  , private animationController: AnimationController
-  , private toastController: ToastController) { 
+  constructor(private activeroute: ActivatedRoute , private router: Router , private alertController: AlertController , private animationController: AnimationController, private toastController: ToastController) { 
 
 this.usuario = new Usuario('', '', '', '', '', '');
 
@@ -50,17 +48,14 @@ this.activeroute.queryParams.subscribe(params => {
 
     if (nav.extras.state) {
       this.usuario = nav.extras.state['usuario'];
-      this.datosQR = nav.extras.state['qr'];
       return;
     }
   }
   this.router.navigate(['/login']);
-
 });
 }
 
   public ngOnInit(): void {
-
   }
 
   public logOff(): void{
@@ -68,6 +63,29 @@ this.activeroute.queryParams.subscribe(params => {
   }
 
   public ngAfterViewInit(): void {
+    if (this.itemNombreTit) {
+      const animation = this.animationController
+        .create()
+          .addElement(this.itemNombreTit.nativeElement)
+          .iterations(7)
+          .duration(400)
+          .fromTo('transform', 'scale3d(1,1,1)', 'scale')
+          .fromTo("opacity",0.2,1)
+          ;
+        animation.play();
+      }
+    if (this.itemBienvenida) {
+      const animation = this.animationController
+        .create()
+          .addElement(this.itemBienvenida.nativeElement)
+          .iterations(7)
+          .duration(400)
+          .fromTo('transform', 'scale3d(1,1,1)', 'scale')
+          .fromTo('color','white','orange')
+          .fromTo("opacity",0.2,1)
+          ;
+        animation.play();
+      }
     if (this.itemTitulo) {
     const animation = this.animationController
       .create()
@@ -75,20 +93,9 @@ this.activeroute.queryParams.subscribe(params => {
         .iterations(Infinity)
         .duration(6000)
         .fromTo('transform', 'translate(0%)', 'translate(100%)')
-      //  .fromTo('opacity', 0.2, 1)
         ;
-
       animation.play();
     }
-  }
-
-  public limpiarFormulario(): void {
-
-    this.usuario.nombre = '';
-    this.usuario.apellido = '';
-
-    this.animateItem(this.itemNombre.nativeElement);
-    this.animateItem(this.itemApellido.nativeElement);
   }
 
   public animateItem(elementRef: any) {
@@ -101,34 +108,6 @@ this.activeroute.queryParams.subscribe(params => {
       .play();
   }
 
-  public mostrarDatosPersona(): void {
-    
-
-    if (this.usuario.nombre.trim() === '' && this.usuario.apellido === '') {
-      this.presentAlert('Datos personales', 'Para mostrar los datos de la persona, '
-        + 'al menos debe tener un valor para el nombre o el apellido.');
-      return;
-    }
-
-    let mensaje = '';
-    if (this.usuario) {
-      mensaje += '<br><b>Usuario</b>: <br>' + this.usuario.getCorreo();
-      mensaje += '<br><b>Nombre</b>: <br>' + this.usuario.getNombre();
-      mensaje += '<br><b>Apellido</b>: <br>' + this.usuario.getApellido();
-
-      this.presentAlert('Datos personales', mensaje);
-    }
-  }
-
-  public async presentAlert(titulo: string, mensaje: string) {
-    const alert = await this.alertController.create({
-      header: titulo,
-      message: mensaje,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
   public async comenzarEscaneoQR() {
     const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({
       video: {facingMode: 'environment'}
@@ -162,6 +141,7 @@ this.activeroute.queryParams.subscribe(params => {
         this.mostrarDatosQROrdenados(qrCode.data);
         this.datosQR = qrCode.data;
         this.datos = true;
+        this.mostrarMensaje(`QR Escaneado`);
         return true;
       }
     }
@@ -175,17 +155,17 @@ this.activeroute.queryParams.subscribe(params => {
   }
 
   public detenerEscaneoQR(): void {
+    this.mostrarMensaje(`No se escaneo ningun QR`);
     this.escaneando = false;
   }
 
-  public ingresar(): void {
+  public miClase(): void {
     if (this.datos) {
       const navigationExtras: NavigationExtras = {
         state: {
           asistencia: this.asistencia
         }
       };
-      
       this.router.navigate(['/misclase'], navigationExtras);
     }
     else{
