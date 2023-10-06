@@ -14,15 +14,14 @@
 <ion-content [fullscreen]="true" class="ion-padding-horizontal" >
   <ion-title class="ion-padding-top">
     <ion-label class="ion-text-center" >
-      <h1 #Bienvenida>¡Bienvenid@!</h1>
+      <h1 #Bienvenida *ngIf="!escaneando">¡Bienvenid@!</h1>
       <h2 #Nombre *ngIf="usuario">{{ usuario.nombre  }} {{ usuario.apellido }}</h2>
-      <p>Escanea el codigo QR para registrar tu asistencia a clases</p>
+      <p>Escanea el código QR para registrar tu asistencia a clases</p>
     </ion-label>
   </ion-title>
   <ion-grid class="ion-text-center">
     
     <a *ngIf="!escaneando" (click)="comenzarEscaneoQR()" class="qr">
-      
       <img src="assets/img/QR_code_for_mobile_English_Wikipedia.svg.png" style="height: 450px;">
     </a>
     <p (click)="comenzarEscaneoQR()" *ngIf="!escaneando" style="position:relative; top: -235px;"> Presione para activar la camara </p>

@@ -81,8 +81,8 @@ this.activeroute.queryParams.subscribe(params => {
           .iterations(7)
           .duration(400)
           .fromTo('transform', 'scale3d(1,1,1)', 'scale')
-          .fromTo('color','white','orange')
-          .fromTo("opacity",0.2,1)
+          .fromTo('color','orange','white')
+          .fromTo("opacity",1,0.2)
           ;
         animation.play();
       }
@@ -142,6 +142,12 @@ this.activeroute.queryParams.subscribe(params => {
         this.datosQR = qrCode.data;
         this.datos = true;
         this.mostrarMensaje(`QR Escaneado`);
+        const navigationExtras: NavigationExtras = {
+          state: {
+            asistencia: this.asistencia
+          }
+        };
+        this.router.navigate(['/misclase'], navigationExtras);
         return true;
       }
     }
