@@ -15,7 +15,7 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class HomePage implements OnInit, AfterViewInit {
-
+  bloquear: boolean = true;
   @ViewChild('Nombre', { read: ElementRef }) itemNombreTit!: ElementRef;
   @ViewChild('Bienvenida', { read: ElementRef }) itemBienvenida!: ElementRef;
   @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
@@ -37,7 +37,7 @@ export class HomePage implements OnInit, AfterViewInit {
   public datos = false;
 
   constructor(private activeroute: ActivatedRoute , private router: Router , private alertController: AlertController , private animationController: AnimationController, private toastController: ToastController) { 
-
+    
 this.usuario = new Usuario('', '', '', '', '', '');
 
 
@@ -147,8 +147,9 @@ this.activeroute.queryParams.subscribe(params => {
             asistencia: this.asistencia
           }
         };
-        this.router.navigate(['/misclase'], navigationExtras);
         return true;
+        
+        this.router.navigate(['/misclase'], navigationExtras);
       }
     }
     this.datos = false;
@@ -185,6 +186,15 @@ this.activeroute.queryParams.subscribe(params => {
         duration: duracion? duracion: 2000
       });
     toast.present();
+  }
+  
+  segmentChanged(event: any) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        asistencia: this.asistencia
+      }
+    };
+    this.router.navigate(['home/'+ event.detail.value], navigationExtras);
   }
 
   

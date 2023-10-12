@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home.page';
+import { Routes, RouterModule } from '@angular/router';
 import { QrComponent } from 'src/app/components/qr/qr.component';
 import { MiclaseComponent } from 'src/app/components/miclase/miclase.component';
 import { MisdatosComponent } from 'src/app/components/misdatos/misdatos.component';
 import { ForoComponent } from 'src/app/components/foro/foro.component';
 
 
+import { MisdatosPage } from './misdatos.page';
+
 const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    component: MisdatosPage,
     children: [
       {
         path: 'qr', 
@@ -34,6 +35,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomePageRoutingModule {}
+export class MisdatosPageRoutingModule {}

@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },  {
+  },
+  {
     path: 'correo',
     loadChildren: () => import('./pages/correo/correo.module').then( m => m.CorreoPageModule)
   },
@@ -33,6 +34,14 @@ const routes: Routes = [
   {
     path: 'misclase',
     loadChildren: () => import('./pages/misclase/misclase.module').then( m => m.MisclasePageModule)
+  },
+  // {
+  //   path: 'foro',
+  //   loadChildren: () => import('./pages/foro/foro.module').then( m => m.ForoPageModule)
+  // },
+  {
+    path: 'misdatos',
+    loadChildren: () => import('./pages/misdatos/misdatos.module').then( m => m.MisdatosPageModule)
   },
 
 ];

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title >
+      
+        <img src="assets/img/logo_duoc.png" style="height: 80px;" class="ion-text-center">
+    
+        <h1 #titulo>Sistema de Asistencia DuocUC</h1>
+
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="misdatos" (ionChange)="segmentChanged($event)">
+
+      <ion-segment-button value="home">
+        <ion-label>QR</ion-label>
+      </ion-segment-button>
+
+      <!-- <ion-segment-button value="misclase">
+        <ion-label>Asistencia</ion-label>
+      </ion-segment-button> -->
+
+      <ion-segment-button value="misclase" >
+        <ion-label>Asistencia</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="foro">
+        <ion-label>Foro</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="misdatos">
+        <ion-label>Perfil</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
